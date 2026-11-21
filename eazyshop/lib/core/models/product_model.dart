@@ -10,6 +10,7 @@ class Product {
   final String? productImage;
   final String? category;
   final String? barcode;
+  final int? instockQuantity;
 
   Product(
       {this.dateAdded,
@@ -21,19 +22,26 @@ class Product {
       this.productImage,
       this.productName,
       this.barcode,
+      this.instockQuantity,
       this.category,
       this.sellerId});
-  Product.fromMap(Map snapshot, this.id)
-      : dateAdded = snapshot['dateAdded'],
-        description = snapshot['description'],
-        discountPrice = snapshot['discountPrice'],
-        isDiscounted = snapshot['isDiscounted'],
-        price = snapshot['price'],
-        productImage = snapshot['productImage'],
-        productName = snapshot['productName'],
-        category = snapshot['category'],
-        barcode = snapshot['barcode'],
-        sellerId = snapshot['sellerId'];
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'],
+      dateAdded: json['dateAdded'],
+      description: json['description'],
+      discountPrice: json['discountPrice'],
+      isDiscounted: json['isDiscounted'],
+      price: json['price'],
+      productImage: json['productImage'],
+      productName: json['productName'],
+      category: json['category'],
+      barcode: json['barcode'],
+      instockQuantity: json['instockQuantity'],
+      sellerId: json['sellerId'],
+    );
+  }
+
   toJson() {
     return {
       "dateAdded": dateAdded,
@@ -45,6 +53,7 @@ class Product {
       "productImage": productImage,
       "productName": productName,
       "category": category,
+      "instockQuantity": instockQuantity,
       "sellerId": sellerId
     };
   }
